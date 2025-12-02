@@ -11,18 +11,17 @@ public class Day01Template {
         int position = 50;
         int partOneAnswer = 0;
         for (String line : fileData) {
-
             String direction = line.substring(0,1);
             int amount = Integer.parseInt(line.substring(1));
             System.out.println("Rotate " + direction + " " + amount + " times");
-            partOneAnswer += returnLoop(direction, amount, position);
             position = doRotation(direction, amount, position);
+            if (position == 0)
+            {
+                partOneAnswer++;
+            }
             System.out.println(position);
-
-
+            System.out.println(partOneAnswer);
         }
-
-        System.out.println("Part one answer: " + partOneAnswer);
     }
 
     public static int doRotation(String direction, int amount, int startPosition) {
@@ -36,31 +35,6 @@ public class Day01Template {
 
 
         return newPosition;
-    }
-    public static int returnLoop(String direction, int amount, int startPosition) {
-        int loop = 0;
-        int i = 1;
-        int add = 1;
-        if (direction.equals("L"))
-        {
-            add = -1;
-        }
-        while (i <= amount)
-        {
-            startPosition += add;
-            if (startPosition == 100)
-            {
-                startPosition = 0;
-                loop++;
-            }
-            if (startPosition == -1)
-            {
-                startPosition = 99;
-                loop++;
-            }
-            i++;
-        }
-        return loop;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
