@@ -40,6 +40,17 @@ public class Day02Template {
     // if the product ID is INVALID. "false" otherwise.
     public static boolean isInvalidProductID(long productID) {
         String pID = productID + "";
+        int length = pID.length();
+        if (pID.length() % 2 == 1)
+        {
+            return false;
+        }
+        String segment1 = pID.substring(0, (length-1)/2 + 1);
+        String segment2 = pID.substring((length-1)/2 + 1);
+        if (segment1.equals(segment2))
+        {
+            return true;
+        }
         return false;
     }
 

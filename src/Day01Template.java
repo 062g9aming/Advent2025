@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Day01Template {
 
     public static void main(String[] args) {
-        ArrayList<String> fileData = getFileData("src/data");
+        ArrayList<String> fileData = getFileData("src/day1");
 
         int position = 50;
         int partOneAnswer = 0;
@@ -14,6 +14,7 @@ public class Day01Template {
             String direction = line.substring(0,1);
             int amount = Integer.parseInt(line.substring(1));
             System.out.println("Rotate " + direction + " " + amount + " times");
+            //partOneAnswer += returnLoop(direction, amount, position);
             position = doRotation(direction, amount, position);
             if (position == 0)
             {
@@ -35,6 +36,38 @@ public class Day01Template {
 
 
         return newPosition;
+    }
+
+    public static int returnLoop(String direction, int amount, int startPosition) {
+        int loop = 0;
+        int i = 1;
+        int add = 1;
+        if (direction.equals("L"))
+        {
+            add = -1;
+        }
+        while (i <= amount)
+        {
+            startPosition += add;
+            if (startPosition == 100)
+            {
+                startPosition = 0;
+                loop++;
+            }
+            if (startPosition == -1)
+            {
+                startPosition = 99;
+                loop++;
+            }
+            i++;
+
+        }
+        if (startPosition == 0)
+        {
+        loop++;
+        }
+        System.out.println(loop);
+        return loop;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
